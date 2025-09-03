@@ -1,6 +1,6 @@
 .idea
 *.pkl
-.ckpt
-.pth
+*.ckpt
+*.pth
 .DS_Store
 **/.DS_Store
