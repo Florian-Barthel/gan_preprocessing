@@ -1,6 +1,6 @@
 # GAN Preprocessing
 
-This is the preprocessing pipeline of CGS-GAN.
+This is the preprocessing pipeline of [CGS-GAN](https://github.com/fraunhoferhhi/cgs-gan).
 
 ## Install
 
