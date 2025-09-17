@@ -36,11 +36,6 @@ def get_crop_bound(lm):
         right_e = lm[88]
         left_m = lm[52]
         right_m = lm[61]
-    elif len(lm) == 68:
-        left_e = np.mean(lm[36:42], axis=0)
-        right_e = np.mean(lm[42:48], axis=0)
-        left_m = lm[48]
-        right_m = lm[54]
     else:
         raise ValueError(f"Unknown type of keypoints with a length of {len(lm)}")
 

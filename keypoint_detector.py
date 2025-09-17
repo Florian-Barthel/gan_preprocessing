@@ -5,7 +5,7 @@ import cv2
 
 
 class KeypointDetectorInsightface:
-    def __init__(self):
+    def __init__(self, momentum=0.0):
         self.app = app.FaceAnalysis(name="buffalo_l", verbose=False)
         self.app.prepare(ctx_id=0)
 

@@ -24,6 +24,7 @@ def P2sRt(P):
         R: (3, 3). rotation matrix.
         t2d: (2,). 2d translation.
     """
+    P = P.astype(np.float64)
     t3d = P[:, 3]
     R1 = P[0:1, :3]
     R2 = P[1:2, :3]
