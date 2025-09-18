@@ -33,7 +33,7 @@ class TDDFA(object):
     """TDDFA: named Three-D Dense Face Alignment (TDDFA)"""
 
     def __init__(self, **kvs):
-        torch.set_grad_enabled(False)
+        # torch.set_grad_enabled(False)
 
         # load BFM
         self.bfm = BFMModel(
@@ -122,7 +122,7 @@ class TDDFA(object):
             else:
                 param = self.model(inp)
 
-            param = param.squeeze().cpu().numpy().flatten().astype(np.float32)
+            param = param.squeeze().detach().cpu().numpy().flatten().astype(np.float32)
             param = param * self.param_std + self.param_mean  # re-scale
             # print('output', param)
             param_lst.append(param)

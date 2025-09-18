@@ -14,7 +14,7 @@ class Preprocessor:
 
     def __call__(self, images, target_size, apply_mask=True):
         keypoints = self.keypoint_detector(images)
-        cropped_images, cams = self.face_cropper(images, keypoints, target_size)
+        cropped_images, cams, bbox = self.face_cropper(images, keypoints, target_size)
         masks = self.masking(cropped_images)
         if apply_mask:
             cropped_images = masks["applied_masks"]

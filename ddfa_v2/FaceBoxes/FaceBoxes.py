@@ -46,7 +46,7 @@ def viz_bbox(img, dets, wfp="out.jpg"):
 
 class FaceBoxes:
     def __init__(self, timer_flag=False):
-        torch.set_grad_enabled(False)
+        # torch.set_grad_enabled(False)
 
         net = FaceBoxesNet(
             phase="test", size=None, num_classes=2
