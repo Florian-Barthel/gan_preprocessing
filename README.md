@@ -2,10 +2,6 @@
 
 This is the preprocessing pipeline of [CGS-GAN](https://github.com/fraunhoferhhi/cgs-gan).
 
-## Install
-
-1. Install the environment.
-2. run `./build.sh` 
 
 ## Usage
 
