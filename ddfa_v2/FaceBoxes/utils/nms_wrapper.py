@@ -7,7 +7,7 @@
 # Written by Ross Girshick
 # --------------------------------------------------------
 
-from .nms.cpu_nms import cpu_nms, cpu_soft_nms
+from ddfa_v2.FaceBoxes.utils.nms.py_cpu_nms import py_cpu_nms
 
 
 def nms(dets, thresh):
@@ -15,5 +15,5 @@ def nms(dets, thresh):
 
     if dets.shape[0] == 0:
         return []
-    return cpu_nms(dets, thresh)
+    return py_cpu_nms(dets, thresh)
     # return gpu_nms(dets, thresh)
