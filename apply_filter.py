@@ -18,7 +18,7 @@ IMAGE_SIZE = 224
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # confidence bins
-THRESHOLDS = [0.95]
+THRESHOLDS = [0.90]
 
 # ImageNet normalization
 MEAN = torch.tensor([0.485, 0.456, 0.406]).view(3,1,1)
