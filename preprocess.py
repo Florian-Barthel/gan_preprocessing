@@ -12,7 +12,7 @@ class Preprocessor:
         self.face_cropper = FaceCropper()
         self.masking = Masking()
 
-    def __call__(self, images, target_size, apply_mask=True):
+    def __call__(self, images, target_size, apply_mask=False):
         keypoints = self.keypoint_detector(images)
         cropped_images, cams, bbox = self.face_cropper(images, keypoints, target_size)
         masks = self.masking(cropped_images)
@@ -26,7 +26,6 @@ if __name__ == "__main__":
     image_path = "test_files/test_face.jpg"
     image = np.array(Image.open(image_path))
     preprocessed = preprocessor([image], 512)
-    output_path = "test_files/test_face_preprocessed.png"
-    Image.fromarray(preprocessed["cropped_images"][0]).save(output_path)
+    Image.fromarray(preprocessed["cropped_images"][0]).save("test_files/test_face_preprocessed.png")
+    Image.fromarray(preprocessed["masks"][0]).save("test_files/test_face_preprocessed_mask.png")
     print(preprocessed["cams"][0])
-    print(preprocessed["masks"][0])
