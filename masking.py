@@ -70,7 +70,7 @@ class Masking:
             img_resized = self.resize_for_input(img)
             _, _, pred_mask = self.modnet(img_resized.cuda(), True)
             _, _, im_h, im_w = img.shape
-            mask = F.interpolate(pred_mask, size=(im_h, im_w), mode="area")
+            mask = F.interpolate(pred_mask, size=(im_h, im_w), mode="bilinear")
             mask = mask.detach().cpu().numpy()
             applied = img * mask + torch.tensor(background)[None, :, None, None] * (1 - mask)
             applied = ((applied.numpy() + 1) * 255 / 2).astype(np.uint8)
@@ -82,9 +82,13 @@ class Masking:
 
 if __name__ == "__main__":
     masker = Masking()
-    image_path = "test_files/test_face.jpg"
-    image = Image.open(image_path)
-    image_np = np.array(image)
-    masks = masker([image_np])
-    Image.fromarray(masks["masks"][0]).save("test_files/test_face_mask.png")
-    Image.fromarray(masks["applied_masks"][0]).save("test_files/test_face_mask_applied.png")
+    image_dir = "/nvme1/birmingham/id_1_color_calib_v2/images/"
+    target_dir = "/nvme1/birmingham/id_1_color_calib_v2/masks/"
+    os.makedirs(target_dir, exist_ok=True)
+
+    for image_name in os.listdir(image_dir):
+        image = Image.open(os.path.join(image_dir, image_name))
+        image_np = np.array(image)
+        masks = masker([image_np])
+        # Image.fromarray(masks["masks"][0]).save("test_files/test_face_mask.png")
+        Image.fromarray(masks["applied_masks"][0]).save(os.path.join(target_dir, image_name))
