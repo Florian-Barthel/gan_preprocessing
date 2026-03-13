@@ -11,8 +11,8 @@ from tqdm import tqdm
 # -----------------------------
 
 MODEL_PATH = "face_quality_classifier.pt"
-OUTPUT_DIR = "/nvme1/face_datasets/FFHQ/FFHQC/filter_v3"
-IMAGE_DIR = "/nvme1/face_datasets/FFHQ/FFHQC/256"
+IMAGE_DIR = "./test_dataset_preprocessed/1024"
+OUTPUT_DIR = "./test_dataset_preprocessed/filter"
 
 IMAGE_SIZE = 224
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
