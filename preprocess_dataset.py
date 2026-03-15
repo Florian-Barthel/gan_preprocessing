@@ -39,16 +39,18 @@ if __name__ == "__main__":
 
     preprocessor = Preprocessor()
     for i, file in tqdm(enumerate(sorted(os.listdir(image_folder)))):
-        image = np.array(Image.open(os.path.join(image_folder, file)))
-        preprocessed = preprocessor([image], resolution)
-
-        ending = file.split(".")[-1]
-        new_filename = f"{i:09d}.{ending}"
-        filename_dict[file] = new_filename
-        filename_dict_rev[new_filename] = file
-        Image.fromarray(preprocessed["cropped_images"][0]).save(os.path.join(result_folder, str(resolution), new_filename))
-        Image.fromarray(preprocessed["masks"][0]).save(os.path.join(result_folder, "masks", new_filename))
-        camera_dict["labels"].append([new_filename, list(preprocessed["cams"][0])])
+        try:
+            image = np.array(Image.open(os.path.join(image_folder, file)))
+            preprocessed = preprocessor([image], resolution)
+            ending = file.split(".")[-1]
+            new_filename = f"{i:09d}.{ending}"
+            filename_dict[file] = new_filename
+            filename_dict_rev[new_filename] = file
+            Image.fromarray(preprocessed["cropped_images"][0]).save(os.path.join(result_folder, str(resolution), new_filename))
+            Image.fromarray(preprocessed["masks"][0]).save(os.path.join(result_folder, "masks", new_filename))
+            camera_dict["labels"].append([new_filename, list(preprocessed["cams"][0])])
+        except:
+            print("Could not process file", file)
 
     with open(result_folder + "/dataset.json", "w") as f:
         f.write(json.dumps(camera_dict))
